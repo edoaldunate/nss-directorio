@@ -6,590 +6,279 @@
 <title>NSS — Directorio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #ffffff;
-    --navy-mid: #f4f6f9;
-    --navy-light: #e8ecf2;
-    --gold: #b5820a;
-    --gold-light: #c9960c;
-    --gold-pale: #7a5500;
-    --white: #1a2535;
-    --gray: #6b7a8d;
-    --text: #2c3e50;
-    --danger: #c0392b;
-    --warning: #e67e22;
-    --success: #27ae60;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #f0f2f5;
-    color: #2c3e50;
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    padding: 48px 60px 36px;
-    background: #ffffff;
-    border-bottom: 1px solid rgba(181,130,10,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  header::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--gold), transparent 70%);
-  }
-
-  .logo-area {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .logo-icon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-  }
-
-  .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: #1a2535;
-    letter-spacing: 1px;
-  }
-
-  .logo-sub {
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .header-meta {
-    text-align: right;
-  }
-
-  .header-meta h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a2535;
-  }
-
-  .header-meta .date-tag {
-    display: inline-block;
-    margin-top: 6px;
-    padding: 4px 12px;
-    background: rgba(181,130,10,0.1);
-    border: 1px solid rgba(181,130,10,0.35);
-    border-radius: 20px;
-    font-size: 12px;
-    color: var(--gold);
-    letter-spacing: 1px;
-  }
-
-  /* ── NAV TABS ── */
-  .nav-tabs {
-    display: flex;
-    gap: 4px;
-    padding: 24px 60px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.09);
-    overflow-x: auto;
-    background: #ffffff;
-  }
-
-  .nav-tab {
-    padding: 12px 22px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all 0.2s;
-    letter-spacing: 0.5px;
-  }
-
-  .nav-tab:hover { color: #1a2535; }
-  .nav-tab.active {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
-
-  /* ── MAIN CONTENT ── */
-  main {
-    padding: 40px 60px 80px;
-  }
-
-  .section { display: none; }
-  .section.active { display: block; }
-
-  /* ── SECTION TITLE ── */
-  .section-header {
-    margin-bottom: 36px;
-  }
-
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: #1a2535;
-    line-height: 1.2;
-  }
-
-  .section-header .accent-line {
-    width: 48px;
-    height: 3px;
-    background: var(--gold);
-    margin-top: 10px;
-    border-radius: 2px;
-  }
-
-  .section-header p {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #6b7a8d;
-    line-height: 1.6;
-  }
-
-  /* ── CARD GRID ── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .card {
-    background: #f4f6f9;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 12px;
-    padding: 28px;
-    transition: border-color 0.2s, transform 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: var(--gold);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .card:hover {
-    border-color: rgba(181,130,10,0.4);
-    transform: translateY(-2px);
-  }
-  .card:hover::before { opacity: 1; }
-
-  .card-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-
-  .card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #1a2535;
-    margin-bottom: 14px;
-  }
-
-  .card p {
-    font-size: 13.5px;
-    line-height: 1.65;
-    color: #4a5568;
-  }
-
-  /* ── STAT BOXES ── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .stat-box {
-    background: #f4f6f9;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 10px;
-    padding: 22px 20px;
-    text-align: center;
-  }
-
-  .stat-box .stat-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .stat-box .stat-label {
-    font-size: 12px;
-    color: var(--gray);
-    line-height: 1.4;
-  }
-
-  /* ── ACCION LIST ── */
-  .accion-list { list-style: none; }
-
-  .accion-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .accion-item:last-child { border-bottom: none; }
-
-  .accion-badge {
-    flex-shrink: 0;
-    margin-top: 2px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .badge-done { background: rgba(39,174,96,0.2); color: #2ecc71; border: 1px solid rgba(39,174,96,0.3); }
-  .badge-pending { background: rgba(230,126,34,0.2); color: #f39c12; border: 1px solid rgba(230,126,34,0.3); }
-  .badge-nope { background: rgba(192,57,43,0.2); color: #e74c3c; border: 1px solid rgba(192,57,43,0.3); }
-
-  .accion-text {
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: #374151;
-  }
-
-  /* ── TABLE ── */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13.5px;
-  }
-
-  .data-table th {
-    text-align: left;
-    padding: 12px 16px;
-    background: rgba(181,130,10,0.08);
-    color: var(--gold);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid rgba(181,130,10,0.2);
-  }
-
-  .data-table td {
-    padding: 13px 16px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    color: #374151;
-    vertical-align: top;
-    line-height: 1.5;
-  }
-
-  .data-table tr:hover td {
-    background: rgba(181,130,10,0.04);
-  }
-
-  /* ── PROGRESS BARS ── */
-  .prog-item {
-    margin-bottom: 18px;
-  }
-
-  .prog-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    font-size: 13px;
-  }
-
-  .prog-label { color: #2c3e50; }
-  .prog-pct { color: var(--gold); font-weight: 600; }
-
-  .prog-bar {
-    height: 6px;
-    background: rgba(0,0,0,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .prog-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--gold), #e8a020);
-    transition: width 1s cubic-bezier(0.4,0,0.2,1);
-    width: 0;
-  }
-
-  /* ── PE SECTION ── */
-  .pe-area {
-    font-size: 13px;
-    color: var(--gray);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
-  .pe-obj {
-    font-size: 15px;
-    color: #2c3e50;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .meta-chip {
-    display: inline-block;
-    padding: 3px 10px;
-    background: rgba(201,150,12,0.12);
-    border: 1px solid rgba(201,150,12,0.3);
-    border-radius: 4px;
-    font-size: 11.5px;
-    color: var(--gold-pale);
-    margin: 3px 3px 3px 0;
-  }
-
-  .iniciativa-tag {
-    display: inline-block;
-    padding: 4px 11px;
-    background: rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 4px;
-    font-size: 12px;
-    color: #5a6a7e;
-    margin: 3px 3px 3px 0;
-  }
-
-  .pe-card {
-    background: #f4f6f9;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 12px;
-    padding: 26px 28px;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
-  }
-
-  .pe-card:hover {
-    border-color: rgba(181,130,10,0.35);
-  }
-
-  .pe-card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .pe-num {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(181,130,10,0.1);
-    border: 1px solid rgba(181,130,10,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold);
-  }
-
-  .pe-card-title {
-    flex: 1;
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a2535;
-  }
-
-  .pe-toggle {
-    font-size: 18px;
-    color: var(--gold);
-    transition: transform 0.25s;
-    line-height: 1;
-  }
-
-  .pe-toggle.open { transform: rotate(45deg); }
-
-  .pe-body { display: none; padding-top: 4px; }
-  .pe-body.open { display: block; }
-
-  .pe-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 12px;
-  }
-
-  @media (max-width: 720px) {
-    .pe-grid { grid-template-columns: 1fr; }
-    header { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
-    .nav-tabs { padding: 16px 24px 0; }
-    main { padding: 28px 24px 60px; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .divider {
-    height: 1px;
-    background: rgba(0,0,0,0.08);
-    margin: 36px 0;
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-
-  @media (max-width: 820px) {
-    .two-col { grid-template-columns: 1fr; }
-    .card-grid { grid-template-columns: 1fr; }
-  }
-
-  .box-title {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-
-  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-
-  .chip {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .chip-green { background: rgba(39,174,96,0.15); color: #2ecc71; border: 1px solid rgba(39,174,96,0.25); }
-  .chip-orange { background: rgba(230,126,34,0.15); color: #f39c12; border: 1px solid rgba(230,126,34,0.25); }
-  .chip-red { background: rgba(192,57,43,0.15); color: #e74c3c; border: 1px solid rgba(192,57,43,0.25); }
-
-  .mrr-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    height: 100px;
-    padding-top: 10px;
-  }
-
-  .mrr-bar-wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    height: 100%;
-    justify-content: flex-end;
-  }
-
-  .mrr-bar {
-    width: 100%;
-    border-radius: 3px 3px 0 0;
-    background: var(--gold);
-    opacity: 0.7;
-    min-height: 4px;
-    transition: opacity 0.2s;
-    position: relative;
-  }
-
-  .mrr-bar:hover { opacity: 1; }
-
-  .mrr-bar-label {
-    font-size: 9px;
-    color: #6b7a8d;
-    text-align: center;
-  }
-
-  .tooltip {
-    position: absolute;
-    bottom: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1a2535;
-    border: 1px solid var(--gold);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    white-space: nowrap;
-    color: var(--gold);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s;
-    z-index: 10;
-  }
-
-  .mrr-bar:hover .tooltip { opacity: 1; }
-
-  /* Animate sections in */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .section.active > * {
-    animation: fadeUp 0.4s ease forwards;
-  }
-
-  .section.active > *:nth-child(1) { animation-delay: 0s; }
-  .section.active > *:nth-child(2) { animation-delay: 0.07s; }
-  .section.active > *:nth-child(3) { animation-delay: 0.14s; }
-  .section.active > *:nth-child(4) { animation-delay: 0.21s; }
-  .section.active > *:nth-child(5) { animation-delay: 0.28s; }
-
-  .highlighted-note {
-    background: rgba(181,130,10,0.07);
-    border-left: 3px solid var(--gold);
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-    font-size: 13px;
-    color: #374151;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
+:root {
+  --gold: #b5820a;
+  --gold-light: #c9960c;
+  --gold-pale: #f5e9c8;
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface2: #f4f6f9;
+  --border: rgba(0,0,0,0.09);
+  --text-dark: #1a2535;
+  --text-mid: #2c3e50;
+  --text-soft: #6b7a8d;
+  --green: #27ae60;
+  --orange: #e67e22;
+  --red: #c0392b;
+  --edit-ring: rgba(181,130,10,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text-mid); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+/* EDIT BAR */
+.edit-bar {
+  position:sticky; top:0; z-index:100;
+  background:var(--text-dark);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 24px; gap:12px; flex-wrap:wrap;
+}
+.edit-bar-left { display:flex; align-items:center; gap:10px; font-size:13px; color:rgba(255,255,255,0.7); }
+.edit-indicator { width:8px; height:8px; border-radius:50%; background:#555; transition:background 0.3s; }
+.edit-indicator.on { background:#2ecc71; }
+.edit-toggle-btn {
+  padding:7px 18px; border-radius:6px; border:none; cursor:pointer;
+  font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif;
+  background:var(--gold); color:#fff; transition:background 0.2s;
+}
+.edit-toggle-btn:hover { background:var(--gold-light); }
+.save-hint { font-size:11px; color:rgba(255,255,255,0.45); }
+
+/* EDITABLE */
+[contenteditable="true"] { outline:none; border-radius:4px; transition:box-shadow 0.15s, background 0.15s; }
+body.editing [contenteditable="true"] {
+  box-shadow:0 0 0 2px var(--edit-ring);
+  background:rgba(181,130,10,0.05);
+  cursor:text; min-width:20px; min-height:1em;
+}
+body.editing [contenteditable="true"]:focus {
+  box-shadow:0 0 0 2px var(--gold);
+  background:rgba(181,130,10,0.1);
+}
+
+/* CHIPS */
+.chip-editable {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:4px; font-size:12px; font-weight:500;
+  margin:3px 3px 3px 0; cursor:default;
+}
+.chip-editable.meta-chip { background:rgba(181,130,10,0.1); border:1px solid rgba(181,130,10,0.3); color:#7a5500; }
+.chip-editable.iniciativa-tag { background:rgba(0,0,0,0.05); border:1px solid rgba(0,0,0,0.1); color:#4a5568; }
+.chip-del { display:none; cursor:pointer; color:var(--red); font-size:14px; font-weight:700; margin-left:2px; }
+body.editing .chip-del { display:inline; }
+.chip-add-btn {
+  display:none; align-items:center; gap:4px;
+  padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600;
+  cursor:pointer; border:1.5px dashed; background:transparent;
+  font-family:'DM Sans',sans-serif; margin:3px 0; transition:background 0.15s;
+}
+.chip-add-btn.meta { border-color:var(--gold); color:var(--gold); }
+.chip-add-btn.meta:hover { background:var(--gold-pale); }
+.chip-add-btn.ini { border-color:#8ea5be; color:#8ea5be; }
+.chip-add-btn.ini:hover { background:rgba(142,165,190,0.1); }
+body.editing .chip-add-btn { display:inline-flex; }
+
+/* ADD / DELETE BUTTONS */
+.add-row-btn {
+  display:none; width:100%; padding:9px; margin-top:6px;
+  border:1.5px dashed var(--gold); background:transparent;
+  border-radius:8px; color:var(--gold); font-size:12px; font-weight:600;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.15s;
+}
+.add-row-btn:hover { background:var(--gold-pale); }
+body.editing .add-row-btn { display:block; }
+.del-row-btn {
+  display:none; cursor:pointer; color:var(--red);
+  font-size:16px; font-weight:700; padding:0 6px;
+  background:none; border:none; font-family:'DM Sans',sans-serif; vertical-align:middle;
+}
+body.editing .del-row-btn { display:inline; }
+
+/* HEADER */
+header {
+  position:relative; padding:32px 40px 24px; background:var(--surface);
+  border-bottom:1px solid rgba(181,130,10,0.2);
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px; box-shadow:0 2px 12px rgba(0,0,0,0.06); flex-wrap:wrap;
+}
+header::before {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px; background:linear-gradient(90deg,var(--gold),transparent 70%);
+}
+.logo-area { display:flex; align-items:center; gap:14px; }
+.logo-icon { width:42px; height:42px; flex-shrink:0; }
+.logo-text { font-family:'Playfair Display',serif; font-size:24px; font-weight:900; color:var(--text-dark); letter-spacing:1px; }
+.logo-sub { font-size:10px; color:var(--gold); letter-spacing:3px; text-transform:uppercase; font-weight:500; }
+.header-meta { text-align:right; }
+.header-meta h1 { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--text-dark); }
+.date-tag {
+  display:inline-block; margin-top:5px; padding:4px 12px;
+  background:rgba(181,130,10,0.1); border:1px solid rgba(181,130,10,0.35);
+  border-radius:20px; font-size:12px; color:var(--gold); letter-spacing:1px;
+}
+
+/* NAV */
+.nav-tabs {
+  display:flex; gap:2px; padding:0 40px;
+  border-bottom:1px solid var(--border); background:var(--surface);
+  overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.nav-tabs::-webkit-scrollbar { display:none; }
+.nav-tab {
+  padding:13px 16px; font-size:13px; font-weight:500; color:var(--text-soft);
+  cursor:pointer; border-bottom:2px solid transparent;
+  white-space:nowrap; transition:all 0.2s; flex-shrink:0;
+}
+.nav-tab:hover { color:var(--text-dark); }
+.nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+/* MAIN */
+main { padding:32px 40px 80px; }
+.section { display:none; }
+.section.active { display:block; }
+
+/* SECTION HEADER */
+.section-header { margin-bottom:26px; }
+.section-header h2 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--text-dark); line-height:1.2; }
+.accent-line { width:38px; height:3px; background:var(--gold); margin-top:8px; border-radius:2px; }
+.section-header p { margin-top:9px; font-size:13.5px; color:var(--text-soft); line-height:1.6; }
+
+/* STATS */
+.stats-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; margin-bottom:28px; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 14px; text-align:center; }
+.stat-val { font-family:'Playfair Display',serif; font-size:24px; font-weight:900; color:var(--gold); line-height:1; margin-bottom:5px; }
+.stat-label { font-size:11px; color:var(--text-soft); line-height:1.4; }
+
+/* CARDS */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin-bottom:28px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px; transition:border-color 0.2s,transform 0.2s; position:relative; overflow:hidden; }
+.card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--gold); opacity:0; transition:opacity 0.2s; }
+.card:hover { border-color:rgba(181,130,10,0.4); transform:translateY(-2px); }
+.card:hover::before { opacity:1; }
+.card-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; font-weight:600; }
+.card h3 { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text-dark); margin-bottom:9px; }
+.card p { font-size:13px; line-height:1.65; color:#4a5568; }
+
+/* ACCION LIST */
+.accion-list { list-style:none; }
+.accion-item { display:flex; align-items:flex-start; gap:10px; padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.05); position:relative; }
+.accion-item:last-child { border-bottom:none; }
+.accion-badge { flex-shrink:0; margin-top:2px; padding:3px 9px; border-radius:20px; font-size:10px; font-weight:600; letter-spacing:0.4px; text-transform:uppercase; white-space:nowrap; }
+.badge-done { background:rgba(39,174,96,0.12); color:#1a7a41; border:1px solid rgba(39,174,96,0.25); }
+.badge-pending { background:rgba(230,126,34,0.12); color:#b05e10; border:1px solid rgba(230,126,34,0.25); }
+.badge-nope { background:rgba(192,57,43,0.12); color:#922b21; border:1px solid rgba(192,57,43,0.25); }
+.accion-text { font-size:13px; line-height:1.55; color:#4a5568; flex:1; }
+
+/* TABLE */
+.table-wrap { overflow-x:auto; margin-bottom:24px; border-radius:10px; border:1px solid var(--border); }
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
+.data-table th { text-align:left; padding:11px 13px; background:rgba(181,130,10,0.07); color:var(--gold); font-weight:600; font-size:11px; letter-spacing:0.5px; border-bottom:1px solid rgba(181,130,10,0.15); white-space:nowrap; }
+.data-table td { padding:11px 13px; border-bottom:1px solid rgba(0,0,0,0.04); color:#4a5568; vertical-align:top; line-height:1.5; }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:rgba(181,130,10,0.02); }
+
+/* PROGRESS */
+.prog-item { margin-bottom:14px; }
+.prog-header { display:flex; justify-content:space-between; margin-bottom:5px; font-size:13px; }
+.prog-label { color:var(--text-mid); }
+.prog-pct { color:var(--gold); font-weight:600; }
+.prog-bar { height:5px; background:rgba(0,0,0,0.07); border-radius:3px; overflow:hidden; }
+.prog-fill { height:100%; border-radius:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light)); transition:width 1s cubic-bezier(0.4,0,0.2,1); width:0; }
+
+/* HIGHLIGHTED NOTE */
+.highlighted-note { background:rgba(181,130,10,0.07); border-left:3px solid var(--gold); padding:12px 16px; border-radius:0 8px 8px 0; font-size:13px; color:#4a5568; margin-bottom:18px; line-height:1.6; }
+
+/* PE CARDS */
+.pe-area { font-size:10px; color:var(--text-soft); letter-spacing:1.5px; text-transform:uppercase; font-weight:600; margin-bottom:7px; }
+.pe-obj { font-size:13.5px; color:var(--text-mid); line-height:1.6; margin-bottom:14px; }
+.pe-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:12px; transition:border-color 0.2s; }
+.pe-card:hover { border-color:rgba(181,130,10,0.2); }
+.pe-card-header { display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; }
+.pe-num { flex-shrink:0; width:28px; height:28px; border-radius:50%; background:rgba(181,130,10,0.1); border:1px solid rgba(181,130,10,0.3); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--gold); }
+.pe-card-title { flex:1; font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--text-dark); }
+.pe-toggle { font-size:18px; color:var(--gold); transition:transform 0.25s; line-height:1; }
+.pe-toggle.open { transform:rotate(45deg); }
+.pe-body { display:none; padding-top:14px; }
+.pe-body.open { display:block; }
+.pe-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+
+/* LAYOUT HELPERS */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px; }
+.box-title { font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:12px; }
+.divider { height:1px; background:rgba(0,0,0,0.06); margin:24px 0; }
+
+/* PROJ GRID */
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; }
+.proj-cell { padding:14px; border-radius:8px; }
+.proj-cell.highlight { background:rgba(181,130,10,0.08); border:1px solid rgba(181,130,10,0.25); }
+.proj-cell-default { background:rgba(0,0,0,0.03); }
+.proj-year { font-size:10px; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.proj-val { font-family:'Playfair Display',serif; font-size:20px; color:var(--gold); font-weight:700; }
+.proj-pct { font-size:12px; color:var(--green); margin-top:3px; }
+
+/* STATUS BARS */
+.status-bars { display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
+.status-bar-item { flex:1; min-width:140px; background:var(--surface); border-radius:10px; padding:16px; border:1px solid var(--border); }
+.status-val { font-size:24px; font-family:'Playfair Display',serif; font-weight:900; line-height:1; }
+.status-lbl { font-size:11.5px; color:var(--text-soft); margin-top:2px; }
+.mini-bar { margin-top:10px; height:4px; background:rgba(0,0,0,0.06); border-radius:2px; overflow:hidden; }
+.mini-fill { height:100%; border-radius:2px; }
+
+/* MRR CHART */
+.mrr-chart { display:flex; align-items:flex-end; gap:4px; height:90px; }
+.mrr-bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; height:100%; justify-content:flex-end; }
+.mrr-bar-label { font-size:9px; color:var(--text-soft); text-align:center; }
+.tooltip { position:absolute; bottom:calc(100% + 5px); left:50%; transform:translateX(-50%); background:var(--text-dark); border:1px solid var(--gold); padding:3px 7px; border-radius:4px; font-size:10px; white-space:nowrap; color:var(--gold-light); pointer-events:none; opacity:0; transition:opacity 0.15s; z-index:10; }
+.mrr-bar-inner:hover .tooltip { opacity:1; }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  header { padding:24px 20px; }
+  .nav-tabs { padding:0 16px; }
+  main { padding:24px 16px 60px; }
+  .two-col { grid-template-columns:1fr; }
+  .pe-grid { grid-template-columns:1fr; }
+  .proj-grid { grid-template-columns:1fr; gap:8px; }
+  .edit-bar { padding:8px 16px; }
+}
+@media (max-width:600px) {
+  .card-grid { grid-template-columns:1fr; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .status-bars { flex-direction:column; }
+  .logo-text { font-size:20px; }
+  .section-header h2 { font-size:22px; }
+  .data-table { font-size:12px; }
+  .data-table th, .data-table td { padding:8px 10px; }
+  header { flex-direction:column; align-items:flex-start; }
+  .header-meta { text-align:left; }
+}
+
+/* FADE IN */
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.section.active > * { animation:fadeUp 0.3s ease forwards; }
+.section.active > *:nth-child(1){animation-delay:0s}
+.section.active > *:nth-child(2){animation-delay:0.05s}
+.section.active > *:nth-child(3){animation-delay:0.1s}
+.section.active > *:nth-child(4){animation-delay:0.15s}
 </style>
 </head>
 <body>
 
+<!-- EDIT BAR -->
+<div class="edit-bar">
+  <div class="edit-bar-left">
+    <div class="edit-indicator" id="editIndicator"></div>
+    <span id="editStatusText">Modo lectura</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <span class="save-hint" id="saveHint"></span>
+    <button class="edit-toggle-btn" id="editToggleBtn" onclick="toggleEditMode()">✏️ Editar</button>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <div class="logo-area">
-    <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="logo-icon" viewBox="0 0 48 48" fill="none">
       <rect x="20" y="4" width="8" height="28" rx="2" fill="#c9960c"/>
       <rect x="4" y="28" width="16" height="6" rx="2" fill="#c9960c"/>
       <rect x="28" y="28" width="16" height="6" rx="2" fill="#c9960c"/>
@@ -606,7 +295,7 @@
   </div>
   <div class="header-meta">
     <h1>Directorio Mensual</h1>
-    <div class="date-tag" id="directorioDate">Q4 · 6 de Enero, 2025</div>
+    <div class="date-tag" contenteditable="false">Q4 · 6 de Enero, 2025</div>
   </div>
 </header>
 
@@ -621,850 +310,456 @@
   <div class="nav-tab" data-tab="planificacion">Planificación 2026</div>
 </nav>
 
-<!-- CONTENT -->
 <main>
 
-  <!-- ═══════════════ RESUMEN ═══════════════ -->
-  <div class="section active" id="sec-resumen">
-    <div class="section-header">
-      <h2>Resumen del Directorio</h2>
-      <div class="accent-line"></div>
-      <p>Vista general de resultados Q4 2025 y prioridades 2026.</p>
+<!-- ══ RESUMEN ══ -->
+<div class="section active" id="sec-resumen">
+  <div class="section-header">
+    <h2 contenteditable="false">Resumen del Directorio</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Vista general de resultados Q4 2025 y prioridades 2026.</p>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val" contenteditable="false">59.8%</div><div class="stat-label" contenteditable="false">Crecimiento MRR 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">$50.9M</div><div class="stat-label" contenteditable="false">MRR Diciembre 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">126</div><div class="stat-label" contenteditable="false">Clientes Contabilidad Q4</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">72.3%</div><div class="stat-label" contenteditable="false">Cobertura MRR / Egresos</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">60.3%</div><div class="stat-label" contenteditable="false">Clientes completados Q4</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">6.35%</div><div class="stat-label" contenteditable="false">Clientes críticos Q4</div></div>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="box-title">Acciones del Directorio Pasado</div>
+      <ul class="accion-list" id="accionesPasadas">
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">En progreso</span><span class="accion-text" contenteditable="false">Roadmap desarrollo TaxFlow — base generada por STEPS, pendiente revisión Clemente y Agustín.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">En progreso</span><span class="accion-text" contenteditable="false">Estandarización planes Piriod — propuesta realizada, falta validar e implementar.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Pendiente</span><span class="accion-text" contenteditable="false">Sistema para medir tiempo RLI por cliente (Operación Renta) — planificado para Enero.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-nope" contenteditable="false">No cumplido</span><span class="accion-text" contenteditable="false">Contabilidad mensual ordenada en Octubre y prebalances de clientes.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Pendiente</span><span class="accion-text" contenteditable="false">Documentación del proceso de ventas — planificado para 2026 (Vambe + Unified Billing).</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+      </ul>
+      <button class="add-row-btn" onclick="addAccionRow('accionesPasadas')">+ Agregar acción</button>
     </div>
-
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val">59.8%</div>
-        <div class="stat-label">Crecimiento MRR 2025</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">$50.9M</div>
-        <div class="stat-label">MRR Diciembre 2025</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">126</div>
-        <div class="stat-label">Clientes Contabilidad Q4</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">72.3%</div>
-        <div class="stat-label">Cobertura promedio MRR / Egresos</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">60.3%</div>
-        <div class="stat-label">Clientes completados Q4</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">6.35%</div>
-        <div class="stat-label">Clientes críticos Q4</div>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div>
-        <div class="box-title">Acciones del Directorio Pasado</div>
-        <ul class="accion-list">
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">En progreso</span>
-            <span class="accion-text">Roadmap desarrollo TaxFlow — base generada por STEPS, pendiente revisión Clemente y Agustín.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">En progreso</span>
-            <span class="accion-text">Estandarización planes Piriod — propuesta realizada, falta validar e implementar.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Pendiente</span>
-            <span class="accion-text">Sistema para medir tiempo RLI por cliente (Operación Renta) — planificado para Enero.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-nope">No cumplido</span>
-            <span class="accion-text">Contabilidad mensual ordenada en Octubre y prebalances de clientes.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Pendiente</span>
-            <span class="accion-text">Documentación del proceso de ventas — planificado para 2026 (Vambe + Unified Billing &amp; Pricing).</span>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <div class="box-title">Objetivos Prioritarios Q1 2026</div>
-        <ul class="accion-list">
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Prioritario</span>
-            <span class="accion-text">Cierre, validación e implementación de la Planificación Estratégica 2026.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Prioritario</span>
-            <span class="accion-text">Implementación nuevo sistema de planes Piriod.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Prioritario</span>
-            <span class="accion-text">Revisión flujos operacionales 2026 (actualizar con App).</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Prioritario</span>
-            <span class="accion-text">Optimización operación renta 2026.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-done">Secundario</span>
-            <span class="accion-text">Documentación y control de gestión del proceso comercial.</span>
-          </li>
-        </ul>
-      </div>
+    <div>
+      <div class="box-title">Objetivos Prioritarios Q1 2026</div>
+      <ul class="accion-list" id="objetivosQ1">
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Prioritario</span><span class="accion-text" contenteditable="false">Cierre, validación e implementación de la Planificación Estratégica 2026.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Prioritario</span><span class="accion-text" contenteditable="false">Implementación nuevo sistema de planes Piriod.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Prioritario</span><span class="accion-text" contenteditable="false">Revisión flujos operacionales 2026 (actualizar con App).</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Prioritario</span><span class="accion-text" contenteditable="false">Optimización operación renta 2026.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-done" contenteditable="false">Secundario</span><span class="accion-text" contenteditable="false">Documentación y control de gestión del proceso comercial.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+      </ul>
+      <button class="add-row-btn" onclick="addAccionRow('objetivosQ1')">+ Agregar objetivo</button>
     </div>
   </div>
+</div>
 
-  <!-- ═══════════════ CORPORATIVO ═══════════════ -->
-  <div class="section" id="sec-corporativo">
-    <div class="section-header">
-      <h2>Corporativo</h2>
-      <div class="accent-line"></div>
-      <p>Estrategia, proyectos, equipo y control de gestión.</p>
-    </div>
-
-    <div class="box-title">Proyectos en curso</div>
-    <table class="data-table" style="margin-bottom:36px">
-      <thead>
-        <tr>
-          <th>Proyecto</th>
-          <th>Hitos</th>
-          <th>Próximos pasos</th>
-        </tr>
-      </thead>
+<!-- ══ CORPORATIVO ══ -->
+<div class="section" id="sec-corporativo">
+  <div class="section-header">
+    <h2 contenteditable="false">Corporativo</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Estrategia, proyectos, equipo y control de gestión.</p>
+  </div>
+  <div class="box-title">Proyectos en curso</div>
+  <div class="table-wrap">
+    <table class="data-table" id="proyectosTable">
+      <thead><tr><th>Proyecto</th><th>Hitos</th><th>Próximos pasos</th><th></th></tr></thead>
       <tbody>
-        <tr>
-          <td><strong style="color:var(--white)">Piriod</strong></td>
-          <td>Mapeo suscripciones actuales y propuesta estructura 2026</td>
-          <td>Validar pricing · Implementar cambios</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--white)">Rebranding NSS</strong></td>
-          <td>Estilo y visión ya definidos</td>
-          <td>Pedir borrador a Matías para 01 FEB</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--white)">Vambe</strong></td>
-          <td>Onboarding en curso</td>
-          <td>Seguir entrenando y puliendo agentes</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--white)">Ads</strong></td>
-          <td>Google Tags → WhatsApp ✓ · Meta cuenta Corp reactivada</td>
-          <td>Aumentar inversión en canales · Piloto IG Ad</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--white)">Oficina Nueva</strong></td>
-          <td>—</td>
-          <td>Por definir</td>
-        </tr>
+        <tr><td contenteditable="false"><strong>Piriod</strong></td><td contenteditable="false">Mapeo suscripciones actuales y propuesta estructura 2026</td><td contenteditable="false">Validar pricing · Implementar cambios</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false"><strong>Rebranding NSS</strong></td><td contenteditable="false">Estilo y visión ya definidos</td><td contenteditable="false">Pedir borrador a Matías para 01 FEB</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false"><strong>Vambe</strong></td><td contenteditable="false">Onboarding en curso</td><td contenteditable="false">Seguir entrenando y puliendo agentes</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false"><strong>Ads</strong></td><td contenteditable="false">Google Tags → WhatsApp ✓ · Meta reactivada</td><td contenteditable="false">Aumentar inversión · Piloto IG Ad</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false"><strong>Oficina Nueva</strong></td><td contenteditable="false">—</td><td contenteditable="false">Por definir</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
       </tbody>
     </table>
+  </div>
+  <button class="add-row-btn" onclick="addTableRow('proyectosTable')">+ Agregar proyecto</button>
+  <div style="margin-top:24px"></div>
+  <div class="box-title">Equipo</div>
+  <div class="card-grid" id="equipoCards">
+    <div class="card"><div class="card-label" contenteditable="false">Decisión</div><h3 contenteditable="false">Contratación Contabilidad</h3><p contenteditable="false">Incorporar recurso en contabilidad para soportar planes enterprise y escala operativa.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Decisión</div><h3 contenteditable="false">Consagrar equipo actual</h3><p contenteditable="false">Estabilizar estructura antes de nuevas incorporaciones. Foco en cultura y desempeño.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Decisión</div><h3 contenteditable="false">Cambio de procurador</h3><p contenteditable="false">Gestionar transición ordenada y asegurar continuidad en procesos legales vigentes.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Decisión</div><h3 contenteditable="false">Bonos equipo legal</h3><p contenteditable="false">Primer bono para equipo legal. Revisar sistema de bonos en contabilidad.</p></div>
+  </div>
+  <button class="add-row-btn" onclick="addCard('equipoCards')">+ Agregar card</button>
+</div>
 
-    <div class="box-title">Equipo</div>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Decisión</div>
-        <h3>Contratación Contabilidad</h3>
-        <p>Incorporar recurso en contabilidad para soportar planes enterprise y escala operativa.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Decisión</div>
-        <h3>Consagrar equipo actual</h3>
-        <p>Estabilizar estructura actual antes de nuevas incorporaciones. Foco en cultura y desempeño.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Decisión</div>
-        <h3>Cambio de procurador</h3>
-        <p>Gestionar transición ordenada y asegurar continuidad en procesos legales vigentes.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Decisión</div>
-        <h3>Bonos equipo legal</h3>
-        <p>Primer bono para equipo legal. Revisar sistema de bonos en contabilidad (modelo por equipo).</p>
-      </div>
-    </div>
-
-    <div class="box-title">Iniciativas estratégicas 2026</div>
-    <div class="highlighted-note">
-      Habilitación de medición CAC/LTV · Inversión ADS Google + apertura IG · Nueva Página Web · Money models y Pricing Strategy · Revisión flujos operacionales (App)
+<!-- ══ FINANCIERO ══ -->
+<div class="section" id="sec-financiero">
+  <div class="section-header">
+    <h2 contenteditable="false">Financiero</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Estado de resultados 2025 y evolución del MRR.</p>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val" contenteditable="false">$51.1M</div><div class="stat-label" contenteditable="false">Resultado acumulado dic 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">100.67%</div><div class="stat-label" contenteditable="false">Cobertura MRR dic 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">72.3%</div><div class="stat-label" contenteditable="false">Cobertura promedio anual</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">−65.8%</div><div class="stat-label" contenteditable="false">Diferencia 24→25 acumulado</div></div>
+  </div>
+  <div class="box-title">Cobertura MRR sobre Egresos Totales (2025)</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:24px;">
+    <div class="mrr-chart" id="mrrChart"></div>
+    <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--text-soft)">
+      <span><span style="color:rgba(181,130,10,0.7)">■</span> Total Egresos</span>
+      <span><span style="color:rgba(39,174,96,0.7)">■</span> MRR</span>
     </div>
   </div>
-
-  <!-- ═══════════════ FINANCIERO ═══════════════ -->
-  <div class="section" id="sec-financiero">
-    <div class="section-header">
-      <h2>Financiero</h2>
-      <div class="accent-line"></div>
-      <p>Estado de resultados 2025 y evolución del MRR.</p>
+  <div class="two-col">
+    <div>
+      <div class="box-title">Observaciones clave</div>
+      <ul class="accion-list" id="obsFinanciero">
+        <li class="accion-item"><span class="accion-badge badge-nope" contenteditable="false">Alerta</span><span class="accion-text" contenteditable="false">MRR cubre solo el 72.3% de egresos en promedio. Necesario acelerar ingresos o reducir costos.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-done" contenteditable="false">Positivo</span><span class="accion-text" contenteditable="false">Diciembre 2025: primer mes con cobertura MRR >100%, cerrando el año en positivo.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+        <li class="accion-item"><span class="accion-badge badge-pending" contenteditable="false">Seguimiento</span><span class="accion-text" contenteditable="false">Servicios Web I+D total pendiente de cuantificar (Steps/Otero/Agus). Ref: ~$78M.</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button></li>
+      </ul>
+      <button class="add-row-btn" onclick="addAccionRow('obsFinanciero')">+ Agregar observación</button>
     </div>
-
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val" style="font-size:22px">$51.1M</div>
-        <div class="stat-label">Resultado acumulado dic 2025</div>
+    <div>
+      <div class="box-title">Metas Financieras 2026</div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label" contenteditable="false">Utilidad &gt; MM$160</span><span class="prog-pct" contenteditable="false">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
       </div>
-      <div class="stat-box">
-        <div class="stat-val" style="font-size:22px">100.67%</div>
-        <div class="stat-label">Cobertura MRR dic 2025</div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label" contenteditable="false">Facturación Total &gt; MM$800</span><span class="prog-pct" contenteditable="false">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
       </div>
-      <div class="stat-box">
-        <div class="stat-val" style="font-size:22px">72.3%</div>
-        <div class="stat-label">Cobertura promedio anual</div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label" contenteditable="false">Caja / Operación [2–2.5x]</span><span class="prog-pct" contenteditable="false">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
       </div>
-      <div class="stat-box">
-        <div class="stat-val" style="font-size:22px">−65.8%</div>
-        <div class="stat-label">Diferencia 24→25 acumulado dic</div>
-      </div>
-    </div>
-
-    <div class="box-title">Cobertura MRR sobre Egresos Totales (2025)</div>
-    <div style="background:#ffffff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);padding:28px;margin-bottom:36px;">
-      <div class="mrr-chart" id="mrrChart"></div>
-      <div style="display:flex;gap:20px;margin-top:16px;font-size:12px;color:#6b7a8d">
-        <span>● <span style="color:var(--gold)">■</span> Total Egresos</span>
-        <span>● <span style="color:#27ae60">■</span> MRR</span>
-      </div>
-      <div style="margin-top:16px;" id="mrrBars"></div>
-    </div>
-
-    <div class="two-col">
-      <div>
-        <div class="box-title">Observaciones clave</div>
-        <ul class="accion-list">
-          <li class="accion-item">
-            <span class="accion-badge badge-nope">Alerta</span>
-            <span class="accion-text">MRR cubre solo el 72.3% de egresos en promedio. Se necesita acelerar ingresos no-MRR o reducir estructura de costos.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-done">Positivo</span>
-            <span class="accion-text">Diciembre 2025 fue el primer mes con cobertura MRR &gt;100%, cerrando el año en positivo.</span>
-          </li>
-          <li class="accion-item">
-            <span class="accion-badge badge-pending">Seguimiento</span>
-            <span class="accion-text">Servicios Web I+D total pendiente de cuantificar (Steps/Otero/Agus). Referencia: ~$78M.</span>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <div class="box-title">Metas Financieras 2026</div>
-        <div class="prog-item">
-          <div class="prog-header"><span class="prog-label">Utilidad &gt; MM$160</span><span class="prog-pct">Meta</span></div>
-          <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
-        </div>
-        <div class="prog-item">
-          <div class="prog-header"><span class="prog-label">Facturación Total &gt; MM$800</span><span class="prog-pct">Meta</span></div>
-          <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
-        </div>
-        <div class="prog-item">
-          <div class="prog-header"><span class="prog-label">Caja / Operación [2 – 2.5x]</span><span class="prog-pct">Meta</span></div>
-          <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
-        </div>
-        <div class="prog-item">
-          <div class="prog-header"><span class="prog-label">CxC vencida &lt; 80% ingresos</span><span class="prog-pct">Meta</span></div>
-          <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
-        </div>
-        <p style="font-size:12px;color:#6b7a8d;margin-top:8px">Los valores de progreso se actualizan cada directorio.</p>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label" contenteditable="false">CxC vencida &lt; 80% ingresos</span><span class="prog-pct" contenteditable="false">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ═══════════════ COMERCIAL ═══════════════ -->
-  <div class="section" id="sec-comercial">
-    <div class="section-header">
-      <h2>Comercial</h2>
-      <div class="accent-line"></div>
-      <p>Resultados MRR, suscripciones Piriod y proyectos 2026.</p>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val">$31.9M</div>
-        <div class="stat-label">MRR Q1 2025</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">$51.0M</div>
-        <div class="stat-label">MRR Dic 2025</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">+59.8%</div>
-        <div class="stat-label">Crecimiento MRR 2025</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">2,000 UF</div>
-        <div class="stat-label">Meta MRR 2026</div>
-      </div>
-    </div>
-
-    <div class="box-title">Proyección MRR — Escenario Agresivo</div>
-    <div style="background:#ffffff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);padding:24px;margin-bottom:32px;">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;">
-        <div style="padding:16px;background:#f4f6f9;border-radius:8px;">
-          <div style="font-size:11px;letter-spacing:1px;color:#6b7a8d;margin-bottom:6px">2025</div>
-          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700">$50.9M</div>
-          <div style="font-size:12px;color:#27ae60;margin-top:4px">+59.8%</div>
-        </div>
-        <div style="padding:16px;background:rgba(181,130,10,0.07);border-radius:8px;border:1px solid rgba(181,130,10,0.25);">
-          <div style="font-size:11px;letter-spacing:1px;color:var(--gold);margin-bottom:6px">2026 META</div>
-          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700">$76.4M</div>
-          <div style="font-size:12px;color:#27ae60;margin-top:4px">+50%</div>
-        </div>
-        <div style="padding:16px;background:#f4f6f9;border-radius:8px;">
-          <div style="font-size:11px;letter-spacing:1px;color:#6b7a8d;margin-bottom:6px">2027</div>
-          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700">$99.3M</div>
-          <div style="font-size:12px;color:#27ae60;margin-top:4px">+30%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box-title">Proyectos / Desafíos Comerciales 2026</div>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Pricing</div>
-        <h3>Nuevos planes y estrategia</h3>
-        <p>Definir pricing strategy 2026 y estructura de planes Piriod. Validar e implementar antes de Q2.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Proceso</div>
-        <h3>Documentación comercial</h3>
-        <p>Registrar leads ingresados y ganados mensualmente vía Vambe y Asana. Tiempo promedio de cierre &le; 15 días.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Canales</div>
-        <h3>Activación ADS + RRSS</h3>
-        <p>Activar campañas Google ADS. Reactivar RRSS (The Code). Piloto Instagram Ads. Eventos de marca en nueva oficina.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Operación</div>
-        <h3>Reactivar SpA + Domicilio</h3>
-        <p>Reactivar ordenadamente la SpA y MRR por Domicilio Tributario en la nueva oficina.</p>
-      </div>
-    </div>
-
-    <div class="box-title">Meta leads 2026</div>
-    <div class="prog-item">
-      <div class="prog-header"><span class="prog-label">Leads mensuales &gt; 80</span><span class="prog-pct">Meta</span></div>
-      <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
-    </div>
-    <div class="prog-item">
-      <div class="prog-header"><span class="prog-label">Conversión leads &gt; 25%</span><span class="prog-pct">Meta</span></div>
-      <div class="prog-bar"><div class="prog-fill" data-pct="0"></div></div>
+<!-- ══ COMERCIAL ══ -->
+<div class="section" id="sec-comercial">
+  <div class="section-header">
+    <h2 contenteditable="false">Comercial</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Resultados MRR, suscripciones Piriod y proyectos 2026.</p>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val" contenteditable="false">$31.9M</div><div class="stat-label" contenteditable="false">MRR Q1 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">$51.0M</div><div class="stat-label" contenteditable="false">MRR Dic 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">+59.8%</div><div class="stat-label" contenteditable="false">Crecimiento MRR 2025</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">2,000 UF</div><div class="stat-label" contenteditable="false">Meta MRR 2026</div></div>
+  </div>
+  <div class="box-title">Proyección MRR — Escenario Agresivo</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:24px;">
+    <div class="proj-grid">
+      <div class="proj-cell proj-cell-default"><div class="proj-year" style="color:var(--text-soft)" contenteditable="false">2025</div><div class="proj-val" contenteditable="false">$50.9M</div><div class="proj-pct" contenteditable="false">+59.8%</div></div>
+      <div class="proj-cell highlight"><div class="proj-year" style="color:var(--gold)" contenteditable="false">2026 META</div><div class="proj-val" contenteditable="false">$76.4M</div><div class="proj-pct" contenteditable="false">+50%</div></div>
+      <div class="proj-cell proj-cell-default"><div class="proj-year" style="color:var(--text-soft)" contenteditable="false">2027</div><div class="proj-val" contenteditable="false">$99.3M</div><div class="proj-pct" contenteditable="false">+30%</div></div>
     </div>
   </div>
+  <div class="box-title">Proyectos / Desafíos Comerciales 2026</div>
+  <div class="card-grid" id="comercialCards">
+    <div class="card"><div class="card-label" contenteditable="false">Pricing</div><h3 contenteditable="false">Nuevos planes y estrategia</h3><p contenteditable="false">Definir pricing strategy 2026 y estructura de planes Piriod. Validar e implementar antes de Q2.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Proceso</div><h3 contenteditable="false">Documentación comercial</h3><p contenteditable="false">Registrar leads ingresados y ganados mensualmente vía Vambe y Asana. Tiempo cierre ≤15 días.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Canales</div><h3 contenteditable="false">Activación ADS + RRSS</h3><p contenteditable="false">Activar campañas Google ADS. Reactivar RRSS (The Code). Piloto Instagram Ads.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Operación</div><h3 contenteditable="false">Reactivar SpA + Domicilio</h3><p contenteditable="false">Reactivar ordenadamente la SpA y MRR por Domicilio Tributario en la nueva oficina.</p></div>
+  </div>
+  <button class="add-row-btn" onclick="addCard('comercialCards')">+ Agregar card</button>
+</div>
 
-  <!-- ═══════════════ OPERACIONES ═══════════════ -->
-  <div class="section" id="sec-operaciones">
-    <div class="section-header">
-      <h2>Operaciones</h2>
-      <div class="accent-line"></div>
-      <p>Estado de clientes de contabilidad y proyectos 2026.</p>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val">126</div>
-        <div class="stat-label">Total clientes Q4</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">76</div>
-        <div class="stat-label">Clientes completados (60.3%)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">8</div>
-        <div class="stat-label">Clientes críticos (6.35%)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">83%</div>
-        <div class="stat-label">Clientes en estado Normal</div>
-      </div>
-    </div>
-
-    <div class="box-title">Distribución por estado</div>
-    <div style="display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;">
-      <div style="flex:1;min-width:200px;background:#ffffff;border-radius:10px;padding:20px;border:1px solid rgba(255,255,255,0.07)">
-        <div style="font-size:28px;font-family:'Playfair Display',serif;color:#27ae60;font-weight:900">83%</div>
-        <div style="font-size:13px;color:#6b7a8d;margin-top:4px">Normal</div>
-        <div style="margin-top:10px;height:5px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden">
-          <div style="width:83%;height:100%;background:#27ae60;border-radius:3px"></div>
-        </div>
-      </div>
-      <div style="flex:1;min-width:200px;background:#ffffff;border-radius:10px;padding:20px;border:1px solid rgba(255,255,255,0.07)">
-        <div style="font-size:28px;font-family:'Playfair Display',serif;color:#f39c12;font-weight:900">10%</div>
-        <div style="font-size:13px;color:#6b7a8d;margin-top:4px">En riesgo</div>
-        <div style="margin-top:10px;height:5px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden">
-          <div style="width:10%;height:100%;background:#f39c12;border-radius:3px"></div>
-        </div>
-      </div>
-      <div style="flex:1;min-width:200px;background:#ffffff;border-radius:10px;padding:20px;border:1px solid rgba(255,255,255,0.07)">
-        <div style="font-size:28px;font-family:'Playfair Display',serif;color:#e74c3c;font-weight:900">7%</div>
-        <div style="font-size:13px;color:#6b7a8d;margin-top:4px">Crítico</div>
-        <div style="margin-top:10px;height:5px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden">
-          <div style="width:7%;height:100%;background:#e74c3c;border-radius:3px"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box-title">Clientes críticos Q4</div>
-    <table class="data-table" style="margin-bottom:32px">
-      <thead>
-        <tr><th>Cliente</th><th>Contadora</th><th>Periodicidad</th><th>Meses Completos</th></tr>
-      </thead>
+<!-- ══ OPERACIONES ══ -->
+<div class="section" id="sec-operaciones">
+  <div class="section-header">
+    <h2 contenteditable="false">Operaciones</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Estado de clientes de contabilidad y proyectos 2026.</p>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val" contenteditable="false">126</div><div class="stat-label" contenteditable="false">Total clientes Q4</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">76</div><div class="stat-label" contenteditable="false">Completados (60.3%)</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">8</div><div class="stat-label" contenteditable="false">Críticos (6.35%)</div></div>
+    <div class="stat-box"><div class="stat-val" contenteditable="false">83%</div><div class="stat-label" contenteditable="false">Estado Normal</div></div>
+  </div>
+  <div class="box-title">Distribución por estado</div>
+  <div class="status-bars">
+    <div class="status-bar-item"><div class="status-val" style="color:#27ae60" contenteditable="false">83%</div><div class="status-lbl" contenteditable="false">Normal</div><div class="mini-bar"><div class="mini-fill" style="width:83%;background:#27ae60"></div></div></div>
+    <div class="status-bar-item"><div class="status-val" style="color:#e67e22" contenteditable="false">10%</div><div class="status-lbl" contenteditable="false">En riesgo</div><div class="mini-bar"><div class="mini-fill" style="width:10%;background:#e67e22"></div></div></div>
+    <div class="status-bar-item"><div class="status-val" style="color:#c0392b" contenteditable="false">7%</div><div class="status-lbl" contenteditable="false">Crítico</div><div class="mini-bar"><div class="mini-fill" style="width:7%;background:#c0392b"></div></div></div>
+  </div>
+  <div class="box-title">Clientes críticos Q4</div>
+  <div class="table-wrap">
+    <table class="data-table" id="clientesCriticosTable">
+      <thead><tr><th>Cliente</th><th>Contadora</th><th>Periodicidad</th><th>Meses</th><th></th></tr></thead>
       <tbody>
-        <tr><td>Inversiones JL SPA</td><td>Javiera</td><td>Semestral</td><td><span style="color:#e74c3c;font-weight:600">0</span></td></tr>
-        <tr><td>Stackylands SPA</td><td>Javiera</td><td>Semestral</td><td>5</td></tr>
-        <tr><td>Advanov Pharma Chile SPA</td><td>Javiera</td><td>Semestral</td><td>8</td></tr>
-        <tr><td>Pagsmile Chile SPA</td><td>Javiera</td><td>Semestral</td><td>10</td></tr>
-        <tr><td>IQ Lab</td><td>Nadia</td><td>Semestral</td><td>10</td></tr>
-        <tr><td>OTEC BSG Institute Chile SPA</td><td>Javiera</td><td>Trimestral</td><td>11</td></tr>
-        <tr><td>Ixcede SPA</td><td>Javiera</td><td>Trimestral</td><td>11</td></tr>
-        <tr><td>Excellerate SPA</td><td>Javiera</td><td>Trimestral</td><td>11</td></tr>
+        <tr><td contenteditable="false">Inversiones JL SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Semestral</td><td contenteditable="false" style="color:#c0392b;font-weight:600">0</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">Stackylands SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Semestral</td><td contenteditable="false">5</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">Advanov Pharma Chile SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Semestral</td><td contenteditable="false">8</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">Pagsmile Chile SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Semestral</td><td contenteditable="false">10</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">IQ Lab</td><td contenteditable="false">Nadia</td><td contenteditable="false">Semestral</td><td contenteditable="false">10</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">OTEC BSG Institute Chile SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Trimestral</td><td contenteditable="false">11</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">Ixcede SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Trimestral</td><td contenteditable="false">11</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
+        <tr><td contenteditable="false">Excellerate SPA</td><td contenteditable="false">Javiera</td><td contenteditable="false">Trimestral</td><td contenteditable="false">11</td><td><button class="del-row-btn" onclick="this.closest('tr').remove()">×</button></td></tr>
       </tbody>
     </table>
-
-    <div class="box-title">Proyectos / Desafíos Ops 2026</div>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Operación Renta</div>
-        <h3>Sistema de control 2026</h3>
-        <p>Usar nuevos proyectos Asana, medir tiempos y registrar avance al cierre de cada mes.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Flujos críticos</div>
-        <h3>Actualización flujos 2026</h3>
-        <p>Actualizar flujos operacionales con la App. Flujos críticos: pagos payroll, impuestos y tesorería de clientes.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">App NSS</div>
-        <h3>Centralización operaciones</h3>
-        <p>Centralizar flujos de contabilidad y conciliación bancaria en la App NSS. Mail Room: notificaciones y cartas (SpA).</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Billing</div>
-        <h3>Mejoras de cobranza</h3>
-        <p>Corte de clientes por estados de no pago y sistema de recordatorios automáticos.</p>
-      </div>
-    </div>
   </div>
-
-  <!-- ═══════════════ TECNOLOGÍA ═══════════════ -->
-  <div class="section" id="sec-tecnologia">
-    <div class="section-header">
-      <h2>Tecnología</h2>
-      <div class="accent-line"></div>
-      <p>App NSS, plataformas y roadmap de desarrollo.</p>
-    </div>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">App NSS</div>
-        <h3>Unified Billing &amp; Onboarding</h3>
-        <p>Implementar sistema unificado de billing y onboarding como pieza central de la operación digital de NSS.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Piriod</div>
-        <h3>Reestructuración de planes</h3>
-        <p>Reordenar planes Piriod. Mapeo completado, validación de pricing pendiente.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">UX/UI</div>
-        <h3>Rediseño de interfaz</h3>
-        <p>Rediseño completo UX/UI de la App NSS alineado al nuevo branding.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">TaxFlow</div>
-        <h3>Roadmap de desarrollo</h3>
-        <p>Base generada por STEPS. Pendiente revisión y desarrollo por parte de Clemente y Agustín. Objetivo: comercializar en 2026.</p>
-      </div>
-    </div>
-
-    <div class="highlighted-note">
-      <strong style="color:var(--gold-light)">Indicadores Tecnología 2026:</strong> Procesos contenidos en App (Sí/No) · Rediseño UX/UI (Sí/No) · Reordenamiento planes Piriod (Sí/No)
-    </div>
+  <button class="add-row-btn" onclick="addTableRow('clientesCriticosTable')">+ Agregar cliente</button>
+  <div style="margin-top:24px"></div>
+  <div class="box-title">Proyectos / Desafíos Ops 2026</div>
+  <div class="card-grid" id="opsCards">
+    <div class="card"><div class="card-label" contenteditable="false">Operación Renta</div><h3 contenteditable="false">Sistema de control 2026</h3><p contenteditable="false">Usar nuevos proyectos Asana, medir tiempos y registrar avance al cierre de cada mes.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Flujos críticos</div><h3 contenteditable="false">Actualización flujos 2026</h3><p contenteditable="false">Actualizar flujos con la App. Críticos: payroll, impuestos y tesorería de clientes.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">App NSS</div><h3 contenteditable="false">Centralización operaciones</h3><p contenteditable="false">Centralizar flujos de contabilidad y conciliación bancaria en App NSS. Mail Room (SpA).</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Billing</div><h3 contenteditable="false">Mejoras de cobranza</h3><p contenteditable="false">Corte de clientes por no pago y sistema de recordatorios automáticos.</p></div>
   </div>
+  <button class="add-row-btn" onclick="addCard('opsCards')">+ Agregar card</button>
+</div>
 
-  <!-- ═══════════════ PLANIFICACIÓN ESTRATÉGICA 2026 ═══════════════ -->
-  <div class="section" id="sec-planificacion">
-    <div class="section-header">
-      <h2>Planificación Estratégica 2026</h2>
-      <div class="accent-line"></div>
-      <p>Objetivos, indicadores, metas e iniciativas por área. Haz clic en cada objetivo para expandir su detalle.</p>
-    </div>
+<!-- ══ TECNOLOGÍA ══ -->
+<div class="section" id="sec-tecnologia">
+  <div class="section-header">
+    <h2 contenteditable="false">Tecnología</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">App NSS, plataformas y roadmap de desarrollo.</p>
+  </div>
+  <div class="card-grid" id="techCards">
+    <div class="card"><div class="card-label" contenteditable="false">App NSS</div><h3 contenteditable="false">Unified Billing &amp; Onboarding</h3><p contenteditable="false">Implementar sistema unificado de billing y onboarding como pieza central de la operación.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">Piriod</div><h3 contenteditable="false">Reestructuración de planes</h3><p contenteditable="false">Reordenar planes Piriod. Mapeo completado, validación de pricing pendiente.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">UX/UI</div><h3 contenteditable="false">Rediseño de interfaz</h3><p contenteditable="false">Rediseño completo UX/UI de la App NSS alineado al nuevo branding.</p></div>
+    <div class="card"><div class="card-label" contenteditable="false">TaxFlow</div><h3 contenteditable="false">Roadmap de desarrollo</h3><p contenteditable="false">Base generada por STEPS. Pendiente revisión Clemente y Agustín. Meta: comercializar 2026.</p></div>
+  </div>
+  <button class="add-row-btn" onclick="addCard('techCards')">+ Agregar card</button>
+  <div style="margin-top:18px"></div>
+  <div class="highlighted-note" contenteditable="false"><strong style="color:var(--gold-light)">Indicadores 2026:</strong> Procesos contenidos en App (S/N) · Rediseño UX/UI (S/N) · Reordenamiento planes Piriod (S/N)</div>
+</div>
 
-    <!-- CORPORATIVO -->
-    <div style="margin-bottom:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;padding-top:8px;">1 · Corporativo</div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">1</div>
-        <div class="pe-card-title">Corp: Estrategia</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Definir y ejecutar un plan estratégico anual claro, con prioridades, métricas y revisiones trimestrales para guiar el crecimiento de NSS.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Metas cumplidas &gt;80%</span>
-            <span class="meta-chip">Governance mensual &gt;80%</span>
-            <span class="meta-chip">Directorios ≥4</span>
-            <span class="meta-chip">Comercialización TaxFlow (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Formalizar governance periódico</span>
-            <span class="iniciativa-tag">Comercialización TaxFlow</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">2</div>
-        <div class="pe-card-title">Corp: Financiero</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Fortalecer la gestión financiera mediante proyecciones precisas, control de costos y monitoreo mensual del MRR para asegurar rentabilidad sostenible.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Utilidad &gt; MM$160</span>
-            <span class="meta-chip">Facturación &gt; MM$800</span>
-            <span class="meta-chip">Caja/Operación [2–2.5x]</span>
-            <span class="meta-chip">CxC vencida &lt;80% ingresos</span>
-            <span class="meta-chip">Venc. CxC &lt;2 meses</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Evaluación fondos concursables</span>
-            <span class="iniciativa-tag">Mejoras billing y cobranza app</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">3</div>
-        <div class="pe-card-title">Corp: Equipo</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Desarrollar una estructura organizacional clara, con roles definidos, onboarding consistente y planes de carrera para los miembros del equipo.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Medición clima ≥2 veces/año</span>
-            <span class="meta-chip">Roles y responsabilidades (S/N)</span>
-            <span class="meta-chip">Sistema mentorías (S/N)</span>
-            <span class="meta-chip">Coaching directivo (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Evaluación clima laboral</span>
-            <span class="iniciativa-tag">Definición roles y responsabilidades</span>
-            <span class="iniciativa-tag">Sistema de mentorías</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">4</div>
-        <div class="pe-card-title">Corp: Marca</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Implementar el nuevo branding de NSS y fortalecer la presencia en el mercado a través de una comunicación coherente y posicionada en legal-tech.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Lanzamiento rebranding (S/N)</span>
-            <span class="meta-chip">Blog ≥4 publicaciones/semestre</span>
-            <span class="meta-chip">NPS ≥6</span>
-            <span class="meta-chip">RRSS &gt;1 post/mes</span>
-            <span class="meta-chip">Evento oficina (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Lanzamiento nueva web</span>
-            <span class="iniciativa-tag">Plan Customer Journey</span>
-            <span class="iniciativa-tag">Plan RRSS con agencia</span>
-            <span class="iniciativa-tag">1-a-1 con líderes</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">5</div>
-        <div class="pe-card-title">Corp: Control de Gestión</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Consolidar un sistema de control de gestión con dashboards, indicadores y seguimiento mensual que permita tomar decisiones basadas en datos.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">LTV/CAC &gt;3.0</span>
-            <span class="meta-chip">Clientes MRR al día ≥80%</span>
-            <span class="meta-chip">Dashboards Asana/Looker (S/N)</span>
-            <span class="meta-chip">Alertas clientes (S/N)</span>
-            <span class="meta-chip">Registro I+D (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Plan inversión Ads</span>
-            <span class="iniciativa-tag">Sistema registro I+D</span>
-            <span class="iniciativa-tag">Dashboards con alertas</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">6</div>
-        <div class="pe-card-title">Corp: Administración, Legal y Estructura</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Optimizar los procesos administrativos y legales, asegurando cumplimiento normativo y una estructura interna que soporte el crecimiento proyectado.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Documentos legales al día &gt;90%</span>
-            <span class="meta-chip">Organigrama formalizado (S/N)</span>
-            <span class="meta-chip">Sistema beneficios (S/N)</span>
-            <span class="meta-chip">Flujos revisados (S/N)</span>
-            <span class="meta-chip">Respaldo info clave (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Revisión docs legales</span>
-            <span class="iniciativa-tag">Formalización organigrama</span>
-            <span class="iniciativa-tag">Bonos legal y contabilidad</span>
-            <span class="iniciativa-tag">Revisión flujos</span>
-            <span class="iniciativa-tag">Respaldo información</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- COMERCIAL -->
-    <div style="margin-bottom:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;padding-top:8px;">2 · Comercial</div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">1</div>
-        <div class="pe-card-title">Comercial: Estrategia</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Implementar una estrategia comercial más agresiva, con procesos de venta definidos y un plan claro para alcanzar 2.000 UF de MRR.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">MRR 2.000 UF</span>
-            <span class="meta-chip">Leads mensuales &gt;80</span>
-            <span class="meta-chip">Conversión leads &gt;25%</span>
-            <span class="meta-chip">Implementación Vambe (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Estrategia de ventas y pricing 2026</span>
-            <span class="iniciativa-tag">Implementación completa Vambe</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">2</div>
-        <div class="pe-card-title">Comercial: Procesos</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Establecer, estandarizar y documentar todos los procesos comerciales, desde prospección hasta cierre, asegurando consistencia y trazabilidad en cada operación.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Tiempo cierre ≤15 días</span>
-            <span class="meta-chip">Documentación proceso (S/N)</span>
-            <span class="meta-chip">Onboarding comercial (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Procesos comerciales estandarizados</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- OPERACIONES -->
-    <div style="margin-bottom:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;padding-top:8px;">3 · Operaciones</div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">1</div>
-        <div class="pe-card-title">Operaciones: Estrategia</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Definir una estrategia operacional centrada en eficiencia, calidad del servicio y escalabilidad del modelo de trabajo.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Procesos estandarizados ≥75%</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Traspaso flujos a Asana (estandarización)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">2</div>
-        <div class="pe-card-title">Operaciones: Procesos</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Estandarizar procesos de prestación, automatizar tareas repetitivas y mejorar los tiempos de entrega para asegurar un servicio más consistente.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Balances Op. Renta &lt;45 días</span>
-            <span class="meta-chip">DDJJ &lt;75 días</span>
-            <span class="meta-chip">Retraso balances &lt;14 días</span>
-            <span class="meta-chip">SLA definido (S/N)</span>
-            <span class="meta-chip">Help center clientes (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">CDG operación renta 2026</span>
-            <span class="iniciativa-tag">Desarrollo SLA</span>
-            <span class="iniciativa-tag">Documentación ayuda clientes</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- TECNOLOGÍA -->
-    <div style="margin-bottom:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;padding-top:8px;">4 · Tecnología</div>
-
-    <div class="pe-card">
-      <div class="pe-card-header" onclick="togglePE(this)">
-        <div class="pe-num">1</div>
-        <div class="pe-card-title">Tecnología: App NSS &amp; Plataformas</div>
-        <div class="pe-toggle">+</div>
-      </div>
-      <div class="pe-body">
-        <div class="pe-obj">Desarrollar y escalar la App NSS como herramienta central para automatizar tareas, mejorar la eficiencia y soportar el crecimiento operativo y comercial.</div>
-        <div class="pe-grid">
-          <div>
-            <div class="pe-area">Indicadores y metas</div>
-            <span class="meta-chip">Procesos en App (S/N)</span>
-            <span class="meta-chip">Rediseño UX/UI (S/N)</span>
-            <span class="meta-chip">Reordenamiento planes Piriod (S/N)</span>
-          </div>
-          <div>
-            <div class="pe-area">Iniciativas</div>
-            <span class="iniciativa-tag">Unified Billing &amp; Onboarding System</span>
-            <span class="iniciativa-tag">Reestructurar planes Piriod</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /planificacion -->
+<!-- ══ PLANIFICACIÓN 2026 ══ -->
+<div class="section" id="sec-planificacion">
+  <div class="section-header">
+    <h2 contenteditable="false">Planificación Estratégica 2026</h2>
+    <div class="accent-line"></div>
+    <p contenteditable="false">Objetivos, indicadores, metas e iniciativas por área. Clic para expandir cada objetivo.</p>
+  </div>
+  <div id="peContainer"></div>
+</div>
 
 </main>
 
 <script>
-  // Tab switching
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('sec-' + target).classList.add('active');
-      triggerProgressBars();
-    });
-  });
+// ── PE DATA ──
+const peData = [
+  { area:'1 · Corporativo', items:[
+    { num:1, title:'Corp: Estrategia', obj:'Definir y ejecutar un plan estratégico anual claro, con prioridades, métricas y revisiones trimestrales para guiar el crecimiento de NSS.', metas:['Metas cumplidas >80%','Governance mensual >80%','Directorios ≥4','Comercialización TaxFlow (S/N)'], iniciativas:['Formalizar governance periódico','Comercialización TaxFlow'] },
+    { num:2, title:'Corp: Financiero', obj:'Fortalecer la gestión financiera mediante proyecciones precisas, control de costos y monitoreo mensual del MRR para asegurar rentabilidad sostenible.', metas:['Utilidad >MM$160','Facturación >MM$800','Caja/Operación [2–2.5x]','CxC vencida <80% ingresos','Venc. CxC <2 meses'], iniciativas:['Evaluación fondos concursables','Mejoras billing y cobranza app'] },
+    { num:3, title:'Corp: Equipo', obj:'Desarrollar una estructura organizacional clara, con roles definidos, onboarding consistente y planes de carrera para los miembros del equipo.', metas:['Medición clima ≥2/año','Roles definidos (S/N)','Sistema mentorías (S/N)','Coaching directivo (S/N)'], iniciativas:['Evaluación clima laboral','Definición roles','Sistema de mentorías'] },
+    { num:4, title:'Corp: Marca', obj:'Implementar el nuevo branding de NSS y fortalecer la presencia en el mercado a través de una comunicación coherente y posicionada en legal-tech.', metas:['Rebranding (S/N)','Blog ≥4/semestre','NPS ≥6','RRSS >1 post/mes','Evento (S/N)'], iniciativas:['Lanzamiento nueva web','Plan Customer Journey','Plan RRSS con agencia','1-a-1 líderes'] },
+    { num:5, title:'Corp: Control de Gestión', obj:'Consolidar un sistema de control de gestión con dashboards, indicadores y seguimiento mensual que permita tomar decisiones basadas en datos.', metas:['LTV/CAC >3.0','MRR al día ≥80%','Dashboards (S/N)','Alertas clientes (S/N)','Registro I+D (S/N)'], iniciativas:['Plan inversión Ads','Sistema registro I+D','Dashboards con alertas'] },
+    { num:6, title:'Corp: Administración, Legal y Estructura', obj:'Optimizar los procesos administrativos y legales, asegurando cumplimiento normativo y una estructura interna que soporte el crecimiento.', metas:['Docs legales >90%','Organigrama (S/N)','Beneficios (S/N)','Flujos revisados (S/N)','Respaldo (S/N)'], iniciativas:['Revisión docs legales','Formalización organigrama','Bonos legal/contabilidad','Revisión flujos','Respaldo info'] },
+  ]},
+  { area:'2 · Comercial', items:[
+    { num:1, title:'Comercial: Estrategia', obj:'Implementar una estrategia comercial más agresiva, con procesos de venta definidos y un plan claro para alcanzar 2.000 UF de MRR.', metas:['MRR 2.000 UF','Leads mensuales >80','Conversión >25%','Vambe (S/N)'], iniciativas:['Estrategia ventas y pricing 2026','Implementación Vambe'] },
+    { num:2, title:'Comercial: Procesos', obj:'Establecer, estandarizar y documentar todos los procesos comerciales, desde prospección hasta cierre, asegurando consistencia y trazabilidad.', metas:['Cierre ≤15 días','Documentación (S/N)','Onboarding comercial (S/N)'], iniciativas:['Procesos comerciales estandarizados'] },
+  ]},
+  { area:'3 · Operaciones', items:[
+    { num:1, title:'Operaciones: Estrategia', obj:'Definir una estrategia operacional centrada en eficiencia, calidad del servicio y escalabilidad del modelo de trabajo.', metas:['Procesos estandarizados ≥75%'], iniciativas:['Traspaso flujos a Asana'] },
+    { num:2, title:'Operaciones: Procesos', obj:'Estandarizar procesos de prestación, automatizar tareas repetitivas y mejorar los tiempos de entrega para un servicio más consistente.', metas:['Balances <45 días','DDJJ <75 días','Retraso <14 días','SLA (S/N)','Help center (S/N)'], iniciativas:['CDG operación renta 2026','Desarrollo SLA','Documentación clientes'] },
+  ]},
+  { area:'4 · Tecnología', items:[
+    { num:1, title:'Tecnología: App NSS & Plataformas', obj:'Desarrollar y escalar la App NSS como herramienta central para automatizar tareas y soportar el crecimiento operativo y comercial.', metas:['Procesos en App (S/N)','Rediseño UX/UI (S/N)','Planes Piriod (S/N)'], iniciativas:['Unified Billing & Onboarding System','Reestructurar planes Piriod'] },
+  ]},
+];
 
-  // Accordion
-  function togglePE(header) {
-    const toggle = header.querySelector('.pe-toggle');
-    const body = header.nextElementSibling;
-    const isOpen = body.classList.contains('open');
-    body.classList.toggle('open', !isOpen);
-    toggle.classList.toggle('open', !isOpen);
-    toggle.textContent = isOpen ? '+' : '×';
-  }
-
-  // Progress bars animation
-  function triggerProgressBars() {
-    setTimeout(() => {
-      document.querySelectorAll('.prog-fill').forEach(bar => {
-        const pct = bar.dataset.pct || 0;
-        bar.style.width = pct + '%';
-      });
-    }, 100);
-  }
-
-  // MRR Chart
-  const mrrData = [
-    { mes: 'Ene', egresos: 50527839, mrr: 30860000, cob: 61.1 },
-    { mes: 'Feb', egresos: 38516830, mrr: 30960000, cob: 80.4 },
-    { mes: 'Mar', egresos: 47107983, mrr: 31180000, cob: 66.2 },
-    { mes: 'Abr', egresos: 53353762, mrr: 31180000, cob: 71.9 },
-    { mes: 'May', egresos: 66280154, mrr: 37350000, cob: 56.3 },
-    { mes: 'Jun', egresos: 51418369, mrr: 39000000, cob: 75.8 },
-    { mes: 'Jul', egresos: 75786431, mrr: 39280000, cob: 51.8 },
-    { mes: 'Ago', egresos: 67133953, mrr: 42900000, cob: 63.9 },
-    { mes: 'Sep', egresos: 53686843, mrr: 46200000, cob: 86.1 },
-    { mes: 'Oct', egresos: 58738058, mrr: 46200000, cob: 78.4 },
-    { mes: 'Nov', egresos: 62902803, mrr: 47100000, cob: 74.9 },
-    { mes: 'Dic', egresos: 48341634, mrr: 50952000, cob: 100.67 }
-  ];
-
-  const maxEg = Math.max(...mrrData.map(d => d.egresos));
-  const chartEl = document.getElementById('mrrChart');
-  if (chartEl) {
-    mrrData.forEach(d => {
-      const wrap = document.createElement('div');
-      wrap.className = 'mrr-bar-wrap';
-      const egH = Math.round((d.egresos / maxEg) * 90);
-      const mrH = Math.round((d.mrr / maxEg) * 90);
-      wrap.innerHTML = `
-        <div style="display:flex;gap:2px;align-items:flex-end;width:100%;height:90px;justify-content:center;">
-          <div style="width:45%;height:${egH}px;background:rgba(201,150,12,0.6);border-radius:2px 2px 0 0;position:relative;cursor:pointer;">
-            <div class="tooltip">$${(d.egresos/1e6).toFixed(1)}M</div>
-          </div>
-          <div style="width:45%;height:${mrH}px;background:rgba(39,174,96,0.65);border-radius:2px 2px 0 0;position:relative;cursor:pointer;">
-            <div class="tooltip">${d.cob}%</div>
-          </div>
+function renderPE() {
+  const container = document.getElementById('peContainer');
+  container.innerHTML = '';
+  peData.forEach((section, si) => {
+    const areaDiv = document.createElement('div');
+    areaDiv.style.cssText = 'margin-bottom:6px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;padding-top:14px;';
+    areaDiv.setAttribute('contenteditable','false');
+    areaDiv.textContent = section.area;
+    container.appendChild(areaDiv);
+    section.items.forEach((item) => {
+      const card = document.createElement('div');
+      card.className = 'pe-card';
+      card.innerHTML = `
+        <div class="pe-card-header" onclick="togglePE(this)">
+          <div class="pe-num">${item.num}</div>
+          <div class="pe-card-title" contenteditable="false">${item.title}</div>
+          <div class="pe-toggle">+</div>
         </div>
-        <div class="mrr-bar-label">${d.mes}</div>
-      `;
-      chartEl.appendChild(wrap);
+        <div class="pe-body">
+          <div class="pe-obj" contenteditable="false">${item.obj}</div>
+          <div class="pe-grid">
+            <div>
+              <div class="pe-area">Indicadores y metas</div>
+              <div class="chip-zone">
+                ${item.metas.map(m=>`<span class="chip-editable meta-chip" contenteditable="false">${m}<span class="chip-del" onclick="this.closest('.chip-editable').remove()">×</span></span>`).join('')}
+                <button class="chip-add-btn meta" onclick="addChip(this,'meta-chip')">+ Meta</button>
+              </div>
+            </div>
+            <div>
+              <div class="pe-area">Iniciativas</div>
+              <div class="chip-zone">
+                ${item.iniciativas.map(i=>`<span class="chip-editable iniciativa-tag" contenteditable="false">${i}<span class="chip-del" onclick="this.closest('.chip-editable').remove()">×</span></span>`).join('')}
+                <button class="chip-add-btn ini" onclick="addChip(this,'iniciativa-tag')">+ Iniciativa</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      container.appendChild(card);
     });
-  }
+    if (si < peData.length - 1) {
+      const d = document.createElement('div'); d.className = 'divider';
+      container.appendChild(d);
+    }
+  });
+}
+renderPE();
 
-  // Initial trigger
-  triggerProgressBars();
+// ── EDIT MODE ──
+let editMode = false;
+function toggleEditMode() {
+  editMode = !editMode;
+  document.body.classList.toggle('editing', editMode);
+  const btn = document.getElementById('editToggleBtn');
+  const ind = document.getElementById('editIndicator');
+  const txt = document.getElementById('editStatusText');
+  const hint = document.getElementById('saveHint');
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    el.setAttribute('contenteditable', editMode ? 'true' : 'false');
+  });
+  if (editMode) {
+    btn.textContent = '✓ Listo';
+    btn.style.background = '#27ae60';
+    ind.classList.add('on');
+    txt.textContent = 'Modo edición activo — clic en cualquier campo';
+    hint.textContent = '';
+  } else {
+    btn.textContent = '✏️ Editar';
+    btn.style.background = 'var(--gold)';
+    ind.classList.remove('on');
+    txt.textContent = 'Modo lectura';
+    hint.textContent = '✓ Cambios guardados';
+    setTimeout(()=>{ document.getElementById('saveHint').textContent = ''; }, 3000);
+  }
+}
+
+// ── ACCORDION ──
+function togglePE(header) {
+  const toggle = header.querySelector('.pe-toggle');
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+  toggle.textContent = isOpen ? '+' : '×';
+}
+
+// ── CHIPS ──
+function addChip(btn, cls) {
+  const text = prompt('Texto:');
+  if (!text) return;
+  const chip = document.createElement('span');
+  chip.className = 'chip-editable ' + cls;
+  chip.setAttribute('contenteditable', editMode ? 'true' : 'false');
+  chip.innerHTML = text + '<span class="chip-del" onclick="this.closest(\'.chip-editable\').remove()">×</span>';
+  btn.parentElement.insertBefore(chip, btn);
+}
+
+// ── ADD CARD ──
+function addCard(id) {
+  const c = document.getElementById(id);
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `<div class="card-label" contenteditable="${editMode?'true':'false'}">Etiqueta</div><h3 contenteditable="${editMode?'true':'false'}">Título</h3><p contenteditable="${editMode?'true':'false'}">Descripción.</p>`;
+  c.appendChild(card);
+}
+
+// ── ADD ACCION ROW ──
+function addAccionRow(id) {
+  const list = document.getElementById(id);
+  const li = document.createElement('li');
+  li.className = 'accion-item';
+  li.innerHTML = `<span class="accion-badge badge-pending" contenteditable="${editMode?'true':'false'}">Estado</span><span class="accion-text" contenteditable="${editMode?'true':'false'}">Descripción de la acción...</span><button class="del-row-btn" onclick="this.closest('li').remove()">×</button>`;
+  list.appendChild(li);
+}
+
+// ── ADD TABLE ROW ──
+function addTableRow(id) {
+  const table = document.getElementById(id);
+  const tbody = table.querySelector('tbody');
+  const cols = tbody.rows[0] ? tbody.rows[0].cells.length : 4;
+  const tr = document.createElement('tr');
+  for (let i = 0; i < cols - 1; i++) {
+    const td = document.createElement('td');
+    td.setAttribute('contenteditable', editMode ? 'true' : 'false');
+    td.textContent = i === 0 ? 'Nuevo ítem' : '—';
+    tr.appendChild(td);
+  }
+  const delTd = document.createElement('td');
+  delTd.innerHTML = `<button class="del-row-btn" onclick="this.closest('tr').remove()">×</button>`;
+  tr.appendChild(delTd);
+  tbody.appendChild(tr);
+}
+
+// ── TABS ──
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sec-' + target).classList.add('active');
+    triggerProgressBars();
+  });
+});
+
+// ── PROGRESS BARS ──
+function triggerProgressBars() {
+  setTimeout(() => {
+    document.querySelectorAll('.prog-fill').forEach(bar => {
+      bar.style.width = (bar.dataset.pct || 0) + '%';
+    });
+  }, 100);
+}
+triggerProgressBars();
+
+// ── MRR CHART ──
+const mrrData = [
+  { mes:'Ene', egresos:50527839, mrr:30860000, cob:61.1 },
+  { mes:'Feb', egresos:38516830, mrr:30960000, cob:80.4 },
+  { mes:'Mar', egresos:47107983, mrr:31180000, cob:66.2 },
+  { mes:'Abr', egresos:53353762, mrr:31180000, cob:71.9 },
+  { mes:'May', egresos:66280154, mrr:37350000, cob:56.3 },
+  { mes:'Jun', egresos:51418369, mrr:39000000, cob:75.8 },
+  { mes:'Jul', egresos:75786431, mrr:39280000, cob:51.8 },
+  { mes:'Ago', egresos:67133953, mrr:42900000, cob:63.9 },
+  { mes:'Sep', egresos:53686843, mrr:46200000, cob:86.1 },
+  { mes:'Oct', egresos:58738058, mrr:46200000, cob:78.4 },
+  { mes:'Nov', egresos:62902803, mrr:47100000, cob:74.9 },
+  { mes:'Dic', egresos:48341634, mrr:50952000, cob:100.67 },
+];
+const maxEg = Math.max(...mrrData.map(d => d.egresos));
+const chartEl = document.getElementById('mrrChart');
+if (chartEl) {
+  mrrData.forEach(d => {
+    const wrap = document.createElement('div');
+    wrap.className = 'mrr-bar-wrap';
+    const egH = Math.round((d.egresos / maxEg) * 78);
+    const mrH = Math.round((d.mrr / maxEg) * 78);
+    wrap.innerHTML = `
+      <div style="display:flex;gap:2px;align-items:flex-end;width:100%;height:78px;justify-content:center;">
+        <div class="mrr-bar-inner" style="width:46%;height:${egH}px;background:rgba(181,130,10,0.55);border-radius:2px 2px 0 0;position:relative;cursor:pointer;">
+          <div class="tooltip">$${(d.egresos/1e6).toFixed(1)}M</div>
+        </div>
+        <div class="mrr-bar-inner" style="width:46%;height:${mrH}px;background:rgba(39,174,96,0.6);border-radius:2px 2px 0 0;position:relative;cursor:pointer;">
+          <div class="tooltip">${d.cob}%</div>
+        </div>
+      </div>
+      <div class="mrr-bar-label">${d.mes}</div>`;
+    chartEl.appendChild(wrap);
+  });
+}
 </script>
 </body>
 </html>
